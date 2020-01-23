@@ -38,7 +38,7 @@ public class Project1Test extends InvokeMainTestCase{
     }
 
     @Test
-    public void testIfIgnoringTheRestIfreadmeIsPresent(){
+    public void testIfIgnoringTheRestIfReadmeIsPresent(){
         MainMethodResult result = invokeMain(new String[] {"-README", "abc xyz", "123", "3/15/2017", "10:39", "xyz"});
         assertThat(result.getExitCode(), equalTo(0));
         assertThat(result.getTextWrittenToStandardOut(), containsString("Aman Singh Solanki"));
@@ -46,7 +46,7 @@ public class Project1Test extends InvokeMainTestCase{
 
     @Test
     public void testDepartDateIsCorrectFormat(){
-        MainMethodResult result = invokeMain(new String[] {"abc", "123", "abc", "3/abc/2017", "10:39", "xyz", "03/2/2017", "11:00"});
+        MainMethodResult result = invokeMain(new String[] {"abc xyz", "123", "abc", "3/abc/2017", "10:39", "xyz", "03/2/2017", "11:00"});
         assertThat(result.getExitCode(), equalTo(1));
         assertThat(result.getTextWrittenToStandardOut(), containsString("date is not in the right format."));
     }
@@ -56,6 +56,62 @@ public class Project1Test extends InvokeMainTestCase{
         MainMethodResult result = invokeMain(new String[] {"abc", "123", "abc", "3/15/2017", "10:39", "xyz", "2/2017", "11:00"});
         assertThat(result.getExitCode(), equalTo(1));
         assertThat(result.getTextWrittenToStandardOut(), containsString("date is not in the right format."));
+    }
+
+    @Test
+    public void testArrivalTimeIsCorrectFormat(){
+        MainMethodResult result = invokeMain(new String[] {"abc", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "1100"});
+        assertThat(result.getExitCode(), equalTo(1));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("time is not in the right format."));
+    }
+
+    @Test
+    public void testDepartureTimeIsCorrectFormat(){
+        MainMethodResult result = invokeMain(new String[] {"abc", "123", "abc", "3/15/2017", "10:ab", "xyz", "1/2/2017", "11:00"});
+        assertThat(result.getExitCode(), equalTo(1));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("time is not in the right format."));
+    }
+
+    @Test
+    public void testSrcisThreeLetters(){
+        MainMethodResult result = invokeMain(new String[] {"abc", "123", "a", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        assertThat(result.getExitCode(), equalTo(1));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("source or destination code is not 3 letters"));
+    }
+
+    @Test
+    public void testDestisThreeLetters(){
+        MainMethodResult result = invokeMain(new String[] {"abc", "123", "abc", "3/15/2017", "10:39", "xyza", "1/2/2017", "11:00"});
+        assertThat(result.getExitCode(), equalTo(1));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("source or destination code is not 3 letters"));
+    }
+
+    @Test
+    public void testSrcisOnlyLetters(){
+        MainMethodResult result = invokeMain(new String[] {"abc", "123", "ab1", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        assertThat(result.getExitCode(), equalTo(1));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("source or destination contains digits, only letters are allowed"));
+    }
+
+    @Test
+    public void testDestisOnlyLetters(){
+        MainMethodResult result = invokeMain(new String[] {"abc", "123", "abc", "3/15/2017", "10:39", "123", "1/2/2017", "11:00"});
+        assertThat(result.getExitCode(), equalTo(1));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("source or destination contains digits, only letters are allowed"));
+    }
+
+    @Test
+    public void testFlightNumberIsinteger(){
+        MainMethodResult result = invokeMain(new String[] {"abc", "flightnumber", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        assertThat(result.getExitCode(), equalTo(1));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("flight number is not a number"));
+    }
+
+    @Test
+    public void testOptionSneakedBetweenArguments(){
+        MainMethodResult result = invokeMain(new String[] {"-print", "abc", "123", "abc", "3/15/2017", "-print", "10:39", "xyz", "1/2/2017"});
+        assertThat(result.getExitCode(), equalTo(1));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("Not enough arguments passed"));
     }
 
 }
