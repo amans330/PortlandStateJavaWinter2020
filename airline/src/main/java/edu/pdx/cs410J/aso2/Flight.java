@@ -67,4 +67,10 @@ public class Flight extends AbstractFlight {
 		this.arrive = arrive;
 		this.depart = depart;
 	}
+	
+	public String getFlightForFile() {
+		String[] departure = this.getDepartureString().split(" ");
+		String[] arrival = this.getArrivalString().split(" ");
+		return this.flightnumber+"@"+this.getSource()+"@"+departure[0]+"@"+departure[1]+"@"+this.getDestination()+"@"+arrival[0]+"@"+arrival[1];
+	}
 }

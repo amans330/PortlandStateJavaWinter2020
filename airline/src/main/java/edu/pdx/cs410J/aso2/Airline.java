@@ -49,7 +49,7 @@ public class Airline extends AbstractAirline{
 	 * getter method for flights
 	 */
 	@Override
-	public Collection getFlights() {
+	public List<Flight> getFlights() {
 		// TODO Auto-generated method stub
 		return flights;
 	}
