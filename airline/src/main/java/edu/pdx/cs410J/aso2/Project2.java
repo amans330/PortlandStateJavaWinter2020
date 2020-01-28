@@ -1,6 +1,8 @@
 package edu.pdx.cs410J.aso2;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import edu.pdx.cs410J.ParserException;
 
@@ -12,6 +14,11 @@ public class Project2 {
 		String path = null;
 		boolean printDetails = false;
 		boolean readFromFile = false;
+		Set<String> optionsValues = new HashSet<String>();
+		// populate possible option values in the set
+		optionsValues.add("-README");
+		optionsValues.add("-print");
+		optionsValues.add("-textFile");
 
 		// 0 arguments check
 		if (args.length == 0) {
@@ -34,6 +41,12 @@ public class Project2 {
 
 		for (int i = 0; i < args.length; i++) {
 			String str = args[i];
+			if(str.charAt(0) == '-') {
+				if(!optionsValues.contains(str)) {
+					System.out.print("Unknown command line option.");
+					System.exit(1);
+				}
+			}
 			if (str.equals("-README")) {
 				printReadMe();
 				System.exit(0);
@@ -116,7 +129,7 @@ public class Project2 {
 
 	public static void printReadMe() {
 		System.out.print("Welcome to the class project of CS510!!\n\nMy name is Aman Singh Solanki. "
-				+ "This is the README for project 1. This program is used to input new airline details in the system. An airline "
+				+ "This is the README for project 2. This program is used to input new airline details in the system. An airline "
 				+ "has a name and has multiple flights operating from it. \n\nA Flight in turn has all the details a flight "
 				+ "can have like flight number, depart and arrive timings, date source and destinations. \n\n"
 				+ "Usage: java edu.pdx.cs410J.<login-id>.Project1 [options] <args>\n" + "args are (in this order):\n"

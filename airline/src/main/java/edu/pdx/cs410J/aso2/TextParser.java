@@ -16,11 +16,16 @@ public class TextParser implements AirlineParser {
 	Airline airline;
 
 	@Override
-	public AbstractAirline parse() throws ParserException {
+	public AbstractAirline<?> parse() throws ParserException {
 		File file = new File(filepath);
 		String st;
 		BufferedReader br;
 		try {
+			// if file does not exist, create a new empty file at that path
+			if(file.exists() == false) {
+				file.createNewFile();
+				System.out.println("New file created.");
+			}
 			br = new BufferedReader(new FileReader(file));
 			while ((st = br.readLine()) != null) {
 				String[] args = st.split("@");
@@ -59,7 +64,7 @@ public class TextParser implements AirlineParser {
 			br.close();
 			return airline;
 		} catch (IOException e) {
-			System.out.println("File not found at this path");
+			System.out.println("File cannot be created.");
 			System.exit(1);
 		}
 
