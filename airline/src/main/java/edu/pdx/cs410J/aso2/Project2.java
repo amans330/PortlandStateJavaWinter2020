@@ -53,7 +53,7 @@ public class Project2 {
 			} else if (str.equals("-print")) {
 				printDetails = true;
 			} else if (str.equals("-textFile")) {
-				if (i + 1 >= args.length) {
+				if (i + 1 >= args.length) { // there is no argument after -textFile
 					System.out.print("Please pass the file name to read/write from.");
 					System.exit(1);
 				}
@@ -102,9 +102,11 @@ public class Project2 {
 		} else {
 			updatedAirline = airline;
 		}
-
+		
+		// create the flight object from the details provided in the command line
 		Flight flight = new Flight(Integer.parseInt(flightNumber), src, departDate + " " + departTime, dest,
 				arriveDate + " " + arriveTime);
+		// add to the the flights in the file
 		updatedAirline.addFlight(flight);
 		System.out.println("Flight added to the airline "+updatedAirline.getName());
 		// print details here if mentioned in options
@@ -113,7 +115,7 @@ public class Project2 {
 				System.out.println(f.toString());
 			}
 		}
-		// if read from file is true, empty the file first and dump the whole object there
+		// if read from file is true, dump the whole airline object there
 		if(readFromFile == true) {
 			TextDumper dumper = new TextDumper(path);
 			try {
@@ -126,7 +128,10 @@ public class Project2 {
 		}
 
 	}
-
+	
+	/**
+	 * prints the read me on console.
+	 */
 	public static void printReadMe() {
 		System.out.print("Welcome to the class project of CS510!!\n\nMy name is Aman Singh Solanki. "
 				+ "This is the README for project 2. This program is used to input new airline details in the system. An airline "

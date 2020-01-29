@@ -10,7 +10,10 @@ import edu.pdx.cs410J.AirlineDumper;
 public class TextDumper implements AirlineDumper {
 	
 	String filepath;
-	
+	/**
+	 * writes the airline object to a file. Each flight is on a new line
+	 * @param airline The airline object to be written to the file
+	 */
 	@Override
 	public void dump(AbstractAirline airline) throws IOException {
 		try {
@@ -32,6 +35,10 @@ public class TextDumper implements AirlineDumper {
 
 	}
 	
+	/**
+	 * constructor method. takes the filepath as input. filepath is the path of the file to write to.
+	 * @param filepath
+	 */
 	public TextDumper (String filepath) {
 		this.filepath = filepath;
 	}

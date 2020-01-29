@@ -14,7 +14,14 @@ public class TextParser implements AirlineParser {
 
 	String filepath;
 	Airline airline;
-
+	
+	/**
+	 * Reads the file at the given path. Calls a check method to determine if data is in the 
+	 * correct format or not. Checks if right number of arguments are present. Creates a new file 
+	 * if file doesn't exist at the given path. Reads all the flights from the flight and returns 
+	 * the airline object containing those to the caller.
+	 * @return AirlineObject
+	 */
 	@Override
 	public AbstractAirline<?> parse() throws ParserException {
 		File file = new File(filepath);
@@ -29,7 +36,7 @@ public class TextParser implements AirlineParser {
 			br = new BufferedReader(new FileReader(file));
 			while ((st = br.readLine()) != null) {
 				String[] args = st.split("@");
-				// the text file is empty
+				// the text file is empty, nothing to read. Return the airline object with no changes
 				if(args[0] == null || args[0].trim().equals("")) {
 					br.close();
 					return airline;
@@ -50,6 +57,7 @@ public class TextParser implements AirlineParser {
 					throw new ParserException("");
 				}
 				
+				// Everything is fine. create the flight object now.
 				String flightNumber = args[1];
 				String src = args[2];
 				String departDate = args[3];
@@ -70,6 +78,12 @@ public class TextParser implements AirlineParser {
 
 		return airline;
 	}
+	
+	/**
+	 * Constructor method
+	 * @param filepath path of the file to read from
+	 * @param airline Airline object to work on.
+	 */
 	
 	public TextParser(String filepath, Airline airline) {
 		this.filepath = filepath;

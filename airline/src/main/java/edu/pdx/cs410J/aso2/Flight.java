@@ -68,6 +68,10 @@ public class Flight extends AbstractFlight {
 		this.depart = depart;
 	}
 	
+	/**
+	 * method to get proper string representation to be written to the file for easy delimition
+	 * @return String '@' separated representation of flight object
+	 */
 	public String getFlightForFile() {
 		String[] departure = this.getDepartureString().split(" ");
 		String[] arrival = this.getArrivalString().split(" ");
