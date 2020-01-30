@@ -26,7 +26,7 @@ public class Project2Test extends InvokeMainTestCase{
 
     @Test
     public void testExtraCommandLineArguments() {
-        MainMethodResult result = invokeMain(new String[] {"-print", "-textFile", "C:\\Users\\Sunny\\Desktop\\empty.txt", "abc xyz", "123", "abc", "3/15/2017", "10:39", "xyz", "03/2/2017", "11:00", "extra"});
+        MainMethodResult result = invokeMain(new String[] {"-print", "-textFile", "src/test/resources/edu/pdx/cs410J/aso2/empty.txt", "abc xyz", "123", "abc", "3/15/2017", "10:39", "xyz", "03/2/2017", "11:00", "extra"});
         assertThat(result.getExitCode(), equalTo(1));
         assertThat(result.getTextWrittenToStandardOut(), containsString("Too many arguments passed."));
     }
@@ -117,40 +117,40 @@ public class Project2Test extends InvokeMainTestCase{
     
     @Test
     public void testAirlineNameNotMatchingFromFile(){
-        MainMethodResult result = invokeMain(new String[] {"-textFile", "C:\\Users\\Sunny\\Desktop\\file.txt", "Wrong Airlines Name", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        MainMethodResult result = invokeMain(new String[] {"-textFile", "src/test/resources/edu/pdx/cs410J/aso2/file.txt", "Wrong Airlines Name", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
         assertThat(result.getExitCode(), equalTo(1));
         assertThat(result.getTextWrittenToStandardOut(), containsString("Provided Airline name does not match with the file."));
     }
 
     @Test
     public void testIncorrectNumberOfArgumentsInFile(){
-        MainMethodResult result = invokeMain(new String[] {"-textFile", "C:\\Users\\Sunny\\Desktop\\wrongnumofargs.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        MainMethodResult result = invokeMain(new String[] {"-textFile", "src/test/resources/edu/pdx/cs410J/aso2/wrongnumofargs.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
         assertThat(result.getExitCode(), equalTo(1));
         assertThat(result.getTextWrittenToStandardOut(), containsString("File is Malformatted. Incorrect number of arguments found!"));
     }
 
     @Test
     public void testInvalidDataInFile(){
-        MainMethodResult result = invokeMain(new String[] {"-textFile", "C:\\Users\\Sunny\\Desktop\\invaliddata.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        MainMethodResult result = invokeMain(new String[] {"-textFile", "src/test/resources/edu/pdx/cs410J/aso2/invaliddata.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
         assertThat(result.getExitCode(), equalTo(1));
         assertThat(result.getTextWrittenToStandardOut(), containsString("File is Malformatted. Invalid data."));
     }
     
     @Test
     public void testEmptyTextFile(){
-        MainMethodResult result = invokeMain(new String[] {"-textFile", "C:\\Users\\Sunny\\Desktop\\empty.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        MainMethodResult result = invokeMain(new String[] {"-textFile", "src/test/resources/edu/pdx/cs410J/aso2/empty.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
         assertThat(result.getTextWrittenToStandardOut(), containsString("Flight added to the airline"));
     }
 
     @Test
     public void testSuccessfullyReadingAndWritingToFile(){
-        MainMethodResult result = invokeMain(new String[] {"-textFile", "C:\\Users\\Sunny\\Desktop\\file.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        MainMethodResult result = invokeMain(new String[] {"-textFile", "src/test/resources/edu/pdx/cs410J/aso2/file.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
         assertThat(result.getTextWrittenToStandardOut(), containsString("File written successfully!"));
     }
     
     @Test
     public void testCreatingAndWritingToANewFile(){
-        MainMethodResult result = invokeMain(new String[] {"-textFile", "C:\\Users\\Sunny\\Desktop\\newfile.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        MainMethodResult result = invokeMain(new String[] {"-textFile", "src/test/resources/edu/pdx/cs410J/aso2/newfile.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
         assertThat(result.getTextWrittenToStandardOut(), containsString("New file created."));
         assertThat(result.getTextWrittenToStandardOut(), containsString("File written successfully!"));
     }
@@ -163,7 +163,7 @@ public class Project2Test extends InvokeMainTestCase{
 
     @Test
     public void testUnknownCommandLineOption(){
-        MainMethodResult result = invokeMain(new String[] {"-aman", "-textFile", "C:\\Users\\Sunny\\Desktop\\newfile.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+        MainMethodResult result = invokeMain(new String[] {"-aman", "-textFile", "src/test/resources/edu/pdx/cs410J/aso2/newfile.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
         assertThat(result.getExitCode(), equalTo(1));
         assertThat(result.getTextWrittenToStandardOut(), containsString("Unknown command line option"));
     }
