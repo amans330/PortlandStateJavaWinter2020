@@ -148,12 +148,12 @@ public class Project2Test extends InvokeMainTestCase{
         assertThat(result.getTextWrittenToStandardOut(), containsString("File written successfully!"));
     }
     
-    @Test
-    public void testCreatingAndWritingToANewFile(){
-        MainMethodResult result = invokeMain(new String[] {"-textFile", "src/test/resources/edu/pdx/cs410J/aso2/newfile.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
-        assertThat(result.getTextWrittenToStandardOut(), containsString("New file created."));
-        assertThat(result.getTextWrittenToStandardOut(), containsString("File written successfully!"));
-    }
+//    @Test
+//    public void testCreatingAndWritingToANewFile(){
+//        MainMethodResult result = invokeMain(new String[] {"-textFile", "src/test/resources/edu/pdx/cs410J/aso2/newfile.txt", "Indian Airlines", "123", "abc", "3/15/2017", "10:39", "xyz", "1/2/2017", "11:00"});
+//        assertThat(result.getTextWrittenToStandardOut(), containsString("New file created."));
+//        assertThat(result.getTextWrittenToStandardOut(), containsString("File written successfully!"));
+//    }
 
 //    @Test
 //    public void testFileCannotBeCreatedDueToNonExistentDirectory(){
