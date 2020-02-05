@@ -21,7 +21,7 @@ public class TextParser implements AirlineParser {
 	 * correct format or not. Checks if right number of arguments are present. Creates a new file 
 	 * if file doesn't exist at the given path. Reads all the flights from the flight and returns 
 	 * the airline object containing those to the caller.
-	 * @return AirlineObject
+	 * @return AirlineObject parsed from the file
 	 */
 	@Override
 	public AbstractAirline<?> parse() throws ParserException {

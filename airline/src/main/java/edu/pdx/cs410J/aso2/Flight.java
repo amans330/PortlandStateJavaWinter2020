@@ -43,7 +43,10 @@ public class Flight extends AbstractFlight implements Comparable<Flight>{
 	public String getDepartureString() {
 		return Util.dateToStringFormat(departureDateTime);
 	}
-
+	
+	/**
+	 * @return departure date as java date
+	 */
 	@Override
 	public Date getDeparture() {
 		return departureDateTime;
@@ -58,13 +61,16 @@ public class Flight extends AbstractFlight implements Comparable<Flight>{
 	}
 
 	/**
-	 * getter method for arive
+	 * getter method for arrival
 	 */
 	@Override
 	public String getArrivalString() {
 		return Util.dateToStringFormat(arrivalDateTime);
 	}
 	
+	/**
+	 * @return arrival date as java date
+	 */
 	@Override
 	public Date getArrival() {
 	    return arrivalDateTime;

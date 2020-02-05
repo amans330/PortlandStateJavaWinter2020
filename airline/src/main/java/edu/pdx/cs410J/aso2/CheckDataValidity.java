@@ -64,21 +64,25 @@ public class CheckDataValidity {
 			return false;
 		}
 		
+		// check if am or pm is mentioned correctly in depart
 		if(!(departampm.equalsIgnoreCase("am") || departampm.equalsIgnoreCase("pm"))) {
 			System.out.print("am or pm is not mentioned correctly.");
 			return false;
 		}
 		
+		// check if am or pm is mentioned correctly in depart
 		if(!(arriveampm.equalsIgnoreCase("am") || arriveampm.equalsIgnoreCase("pm"))) {
 			System.out.print("am or pm is not mentioned correctly.");
 			return false;
 		}
 		
+		// check if airport src is valid
 		if(!AirportNames.getNamesMap().containsKey(src.toUpperCase())) {
 			System.out.print("Invalid source airport code.");
 			return false;
 		}
 		
+		// check if airport dest is valid
 		if(!AirportNames.getNamesMap().containsKey(dest.toUpperCase())) {
 			System.out.print("Invalid destination airport code.");
 			return false;

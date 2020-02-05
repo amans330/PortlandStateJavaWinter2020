@@ -7,10 +7,19 @@ import java.io.IOException;
 import edu.pdx.cs410J.AbstractAirline;
 import edu.pdx.cs410J.AirlineDumper;
 
+/**
+ * 
+ * @author Aman
+ * Handles the Pretty printing
+ *
+ */
 public class PrettyPrinter implements AirlineDumper {
-
-	String filepath;
-
+	
+	String filepath; // file path to pretty print to
+	
+	/**
+	 * @param airline Airline object to pretty print
+	 */
 	@Override
 	public void dump(AbstractAirline airline) throws IOException {
 		if (filepath != null) { // print to file
@@ -21,6 +30,7 @@ public class PrettyPrinter implements AirlineDumper {
 				bw.write("");
 				bw.append("The flights for " + airline.getName() + " are as follows:");
 				bw.newLine();
+				// iterate all flights in this airline
 				for (Flight flight : ((Airline) airline).getFlights()) {
 					bw.append(Util.prettyPrint(flight));
 					bw.newLine();
@@ -45,7 +55,7 @@ public class PrettyPrinter implements AirlineDumper {
 	 * constructor method. takes the filepath as input. filepath is the path of the
 	 * file to write to.
 	 * 
-	 * @param filepath
+	 * @param filepath to pretty print to. Pass Null if printing to console.
 	 */
 	public PrettyPrinter(String filepath) {
 		this.filepath = filepath;

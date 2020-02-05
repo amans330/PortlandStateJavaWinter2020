@@ -48,6 +48,7 @@ public class Airline extends AbstractAirline{
 	
 	/**
 	 * getter method for flights
+	 * @return sorted list of flights
 	 */
 	@Override
 	public List<Flight> getFlights() {
