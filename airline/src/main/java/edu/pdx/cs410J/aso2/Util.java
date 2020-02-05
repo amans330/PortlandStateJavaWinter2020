@@ -29,7 +29,7 @@ public class Util {
 	}
 	
 	public static String prettyPrint(Flight flight) {
-		SimpleDateFormat formatter = new SimpleDateFormat("EEEEE, MMMMM yyyy hh:mm aa");
+		SimpleDateFormat formatter = new SimpleDateFormat("EEEEE, dd MMMMM yyyy hh:mm aa");
 		long duration = (flight.getArrival().getTime() - flight.getDeparture().getTime())/(1000*60);
 		return "Flight "+flight.getNumber()+" departs "+AirportNames.getNamesMap().get(flight.getSource().toUpperCase())+" on "
 				+formatter.format(flight.getDeparture())+" and arrives "+AirportNames.getNamesMap().get(flight.getDestination().toUpperCase()) +" on "
