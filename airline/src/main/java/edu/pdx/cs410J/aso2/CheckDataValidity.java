@@ -1,5 +1,9 @@
 package edu.pdx.cs410J.aso2;
 
+import java.util.Date;
+
+import edu.pdx.cs410J.AirportNames;
+
 public class CheckDataValidity {
 	
 	public static boolean checkArgumentsDataValidity(String[] args){
@@ -22,10 +26,12 @@ public class CheckDataValidity {
 		String src = args[2];
 		String departDate = args[3];
 		String departTime = args[4];
-		String dest = args[5];
-		String arriveDate = args[6];
-		String arriveTime = args[7];
-
+		String departampm = args[5];
+		String dest = args[6];
+		String arriveDate = args[7];
+		String arriveTime = args[8];
+		String arriveampm = args[9];
+		
 		// check if date is valid
 		// regex source:
 		// https://forums.asp.net/t/1945240.aspx?regular+expression+to+check+date+mm+dd+yyyy+which+allows+1+1+2013
@@ -55,6 +61,26 @@ public class CheckDataValidity {
 		// check if flight number is an integer
 		if (!flightNumber.matches("^[0-9]*$")) {
 			System.out.print("flight number is not a number");
+			return false;
+		}
+		
+		if(!(departampm.equalsIgnoreCase("am") || departampm.equalsIgnoreCase("pm"))) {
+			System.out.print("am or pm is not mentioned correctly.");
+			return false;
+		}
+		
+		if(!(arriveampm.equalsIgnoreCase("am") || arriveampm.equalsIgnoreCase("pm"))) {
+			System.out.print("am or pm is not mentioned correctly.");
+			return false;
+		}
+		
+		if(!AirportNames.getNamesMap().containsKey(src.toUpperCase())) {
+			System.out.print("Invalid source airport code.");
+			return false;
+		}
+		
+		if(!AirportNames.getNamesMap().containsKey(dest.toUpperCase())) {
+			System.out.print("Invalid destination airport code.");
 			return false;
 		}
 		

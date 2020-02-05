@@ -2,6 +2,7 @@ package edu.pdx.cs410J.aso2;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import edu.pdx.cs410J.AbstractAirline;
@@ -51,6 +52,7 @@ public class Airline extends AbstractAirline{
 	@Override
 	public List<Flight> getFlights() {
 		// TODO Auto-generated method stub
+		Collections.sort(flights);
 		return flights;
 	}
 	

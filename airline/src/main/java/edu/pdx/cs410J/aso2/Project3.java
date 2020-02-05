@@ -1,24 +1,31 @@
 package edu.pdx.cs410J.aso2;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import edu.pdx.cs410J.ParserException;
 
-public class Project2 {
+public class Project3 {
 
 	public static void main(String[] args) {
 
-		String[] arguments = new String[8];
+		String[] arguments = new String[10];
 		String path = null;
+		String prettyPath = null;
 		boolean printDetails = false;
 		boolean readFromFile = false;
+		boolean prettyPrintToFile = false;
+		boolean prettyPrintToConsole = false;
 		Set<String> optionsValues = new HashSet<String>();
 		// populate possible option values in the set
 		optionsValues.add("-README");
 		optionsValues.add("-print");
 		optionsValues.add("-textFile");
+		optionsValues.add("-pretty");
 
 		// 0 arguments check
 		if (args.length == 0) {
@@ -27,7 +34,7 @@ public class Project2 {
 		}
 
 		// total elements should be at least 8 and not more than 10
-		if (args.length < 8 || args.length > 12) {
+		if (args.length < 10 || args.length > 16) {
 			// this can only be readme
 			if (args[0].equals("-README")) {
 				printReadMe();
@@ -41,7 +48,7 @@ public class Project2 {
 
 		for (int i = 0; i < args.length; i++) {
 			String str = args[i];
-			if(str.charAt(0) == '-') {
+			if(str.charAt(0) == '-' && !(str.equals("-") && !args[i-1].equals("-pretty"))) {
 				if(!optionsValues.contains(str)) {
 					System.out.print("Unknown command line option.");
 					System.exit(1);
@@ -60,8 +67,22 @@ public class Project2 {
 				readFromFile = true;
 				path = args[i + 1];
 				i++;
-			} else {
-				if(index == 8) {
+			} else if(str.equals("-pretty")){
+				if (i + 1 >= args.length) { // there is no argument after -pretty
+					System.out.print("Please pass the file name or a - to mention the outout of pretty print.");
+					System.exit(1);
+				}
+				// if not - then file name is mentioned
+				if(!args[i+1].equals("-")) {
+					prettyPrintToFile = true;
+					prettyPath = args[i+1];
+				}else {
+					prettyPrintToConsole = true;
+				}
+				i++;
+			}
+			else {
+				if(index >= 10) {
 					System.out.print("Too many arguments passed.");
 					System.exit(1);
 				}
@@ -70,7 +91,7 @@ public class Project2 {
 			}
 		}
 		
-		if(index < 8) {
+		if(index < 10) {
 			System.out.println("Not enough arguments passed");
 			System.exit(1);
 		}
@@ -81,22 +102,28 @@ public class Project2 {
 		String airlineName = arguments[0];
 		String flightNumber = arguments[1];
 		String src = arguments[2];
-		String departDate = arguments[3];
-		String departTime = arguments[4];
-		String dest = arguments[5];
-		String arriveDate = arguments[6];
-		String arriveTime = arguments[7];
-
+		Date departDateTime = Util.getDateFromString(arguments[3]+" "+arguments[4]+" "+arguments[5]);
+		String dest = arguments[6];
+		Date arriveDateTime = Util.getDateFromString(arguments[7]+" "+arguments[8]+" "+arguments[9]);
+		
+		// arrive date should be after depart date
+		if(arriveDateTime.getTime() - departDateTime.getTime() < 0) {
+			System.out.println("Arrival date should be after Departure date. "
+					+ "Unless you are in a time machine!");
+			System.exit(1);
+		}
+		
 		Airline airline = new Airline(airlineName);
 		Airline updatedAirline = null;
 		if (readFromFile == true) {
-			// append the flights mentioned in the file here, throw an error if airline
-			// names mismatch
+			// append the flights mentioned in the file with given in the console,
+			// throw an error if airline names mismatch
+			
 			TextParser parser = new TextParser(path, airline);
 			try {
 				updatedAirline = (Airline) parser.parse();
 			} catch (ParserException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
 				System.exit(1);
 			}
 		} else {
@@ -104,19 +131,46 @@ public class Project2 {
 		}
 		
 		// create the flight object from the details provided in the command line
-		Flight flight = new Flight(Integer.parseInt(flightNumber), src, departDate + " " + departTime, dest,
-				arriveDate + " " + arriveTime);
+		Flight flight = new Flight(Integer.parseInt(flightNumber), src, departDateTime, dest, arriveDateTime);
 		// add to the the flights in the file
 		updatedAirline.addFlight(flight);
-		System.out.println("Flight added to the airline "+updatedAirline.getName());
+		
 		// print details here if mentioned in options
 		if (printDetails) {
 			for (Flight f : updatedAirline.getFlights()) {
 				System.out.println(f.toString());
 			}
 		}
+		
+		/***Handle Pretty Print******/
+		
+		// pretty print to console here
+		if (prettyPrintToConsole == true) {
+			PrettyPrinter pp = new PrettyPrinter(null);
+			try {
+				pp.dump(updatedAirline);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Unable to pretty print to the file.");
+				System.exit(1);
+			}
+		}
+		
+		//pretty print to file here
+		if (prettyPrintToFile == true) {
+			PrettyPrinter pp = new PrettyPrinter(prettyPath);
+			try {
+				pp.dump(updatedAirline);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Unable to pretty print to the file.");
+				System.exit(1);
+			}
+		}
+		/**Pretty print ends here**/
+		
 		// if read from file is true, dump the whole airline object there
-		if(readFromFile == true) {
+		if (readFromFile == true) {
 			TextDumper dumper = new TextDumper(path);
 			try {
 				dumper.dump(updatedAirline);
@@ -126,7 +180,6 @@ public class Project2 {
 				System.exit(1);
 			}
 		}
-
 	}
 	
 	/**

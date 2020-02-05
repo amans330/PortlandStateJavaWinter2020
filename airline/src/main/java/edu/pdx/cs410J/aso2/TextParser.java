@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Date;
 
 import edu.pdx.cs410J.AbstractAirline;
 import edu.pdx.cs410J.AirlineParser;
@@ -41,16 +42,17 @@ public class TextParser implements AirlineParser {
 					br.close();
 					return airline;
 				}
-				if(args.length != 8) {
+				if(args.length != 10) {
 					br.close();
 					System.out.println("File is Malformatted. Incorrect number of arguments found!");
 					throw new ParserException("");
 				}
 				if(CheckDataValidity.checkArgumentsDataValidity(args) == false) {
 					br.close();
-					System.out.println("File is Malformatted. Invalid data.");
+					System.out.println("File is Malformatted or contains Invalid data.");
 					throw new ParserException("");
 				}
+				// airline name is case insensitive
 				if(!airline.getName().equalsIgnoreCase(args[0])) {
 					br.close();
 					System.out.println("Provided Airline name does not match with the file.");
@@ -60,13 +62,11 @@ public class TextParser implements AirlineParser {
 				// Everything is fine. create the flight object now.
 				String flightNumber = args[1];
 				String src = args[2];
-				String departDate = args[3];
-				String departTime = args[4];
-				String dest = args[5];
-				String arriveDate = args[6];
-				String arriveTime = args[7];
-				Flight flight = new Flight(Integer.parseInt(flightNumber), src, departDate + " " + departTime, dest,
-						arriveDate + " " + arriveTime);
+				Date departDateTime = Util.getDateFromString(args[3]+" "+args[4]+" "+args[5]);
+				String dest = args[6];
+				Date arriveDateTime = Util.getDateFromString(args[7]+" "+args[8]+" "+args[9]);
+				
+				Flight flight = new Flight(Integer.parseInt(flightNumber), src, departDateTime, dest, arriveDateTime);
 				airline.addFlight(flight);
 			}
 			br.close();
