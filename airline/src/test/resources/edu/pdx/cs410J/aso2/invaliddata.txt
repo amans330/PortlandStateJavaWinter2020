@@ -1,1 +1,1 @@
-Indian Airlines@789@abc@3/15/abcd@10:00@xyz@03/2/2017@11:00
+Indian Airlines@789@abc@3/15/abcd@10:00@pm@xyz@03/2/2017@11:00@pm

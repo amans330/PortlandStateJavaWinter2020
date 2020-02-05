@@ -124,7 +124,7 @@ public class Project3Test extends InvokeMainTestCase{
     public void testInvalidDataInFile(){
         MainMethodResult result = invokeMain(new String[] {"-textFile", "src/test/resources/edu/pdx/cs410J/aso2/invaliddata.txt", "Indian Airlines", "123", "fat", "3/15/2017", "10:39", "pm", "fat", "3/15/2017", "11:00", "pm"});
         assertThat(result.getExitCode(), equalTo(1));
-        assertThat(result.getTextWrittenToStandardOut(), containsString("File is Malformatted."));
+        assertThat(result.getTextWrittenToStandardOut(), containsString("File is Malformatted"));
     }
 
     @Test
