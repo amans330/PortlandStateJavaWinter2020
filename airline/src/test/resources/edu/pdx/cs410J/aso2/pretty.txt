@@ -1,5 +1,7 @@
-The flights for American Airlines are as follows:
-Flight 123 departs Albuquerque, NM on Wednesday, March 2017 10:39 PM and arrives Fort Wayne, IN on Wednesday, March 2017 11:00 PM with a duration of 21 minutes.
-Flight 123 departs Austin, TX on Tuesday, March 2017 10:30 PM and arrives Bangor, ME on Tuesday, March 2017 11:00 PM with a duration of 30 minutes.
-Flight 123 departs Fresno, CA on Wednesday, March 2017 10:39 PM and arrives Fresno, CA on Wednesday, March 2017 11:00 PM with a duration of 21 minutes.
-Flight 123 departs Fresno, CA on Wednesday, March 2017 10:39 PM and arrives Fresno, CA on Wednesday, March 2017 11:00 PM with a duration of 21 minutes.
+The flights for Valid Airlines are as follows:
+Flight 1234 departs Albuquerque, NM on Wednesday, 15 March 2017 10:39 PM and arrives Fort Wayne, IN on Wednesday, 15 March 2017 11:00 PM with a duration of 21 minutes.
+Flight 123 departs Austin, TX on Tuesday, 14 March 2017 10:30 PM and arrives Bangor, ME on Tuesday, 14 March 2017 11:00 PM with a duration of 30 minutes.
+Flight 102 departs Cincinnati, OH on Saturday, 04 March 2017 12:36 PM and arrives Lafayette, LA on Sunday, 05 March 2017 08:19 PM with a duration of 1903 minutes.
+Flight 102 departs Cincinnati, OH on Saturday, 04 March 2017 12:36 PM and arrives Lafayette, LA on Sunday, 05 March 2017 08:19 PM with a duration of 1903 minutes.
+Flight 102 departs Cincinnati, OH on Saturday, 04 March 2017 12:36 PM and arrives Lafayette, LA on Sunday, 05 March 2017 08:19 PM with a duration of 1903 minutes.
+Flight 102 departs Cincinnati, OH on Saturday, 04 March 2017 12:36 PM and arrives Lafayette, LA on Sunday, 05 March 2017 08:19 PM with a duration of 1903 minutes.

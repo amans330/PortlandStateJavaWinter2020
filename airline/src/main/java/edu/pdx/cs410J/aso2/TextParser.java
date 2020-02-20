@@ -34,6 +34,7 @@ public class TextParser implements AirlineParser {
 				file.createNewFile();
 				System.out.println("New file created.");
 			}
+			
 			br = new BufferedReader(new FileReader(file));
 			while ((st = br.readLine()) != null) {
 				String[] args = st.split("@");
@@ -47,16 +48,18 @@ public class TextParser implements AirlineParser {
 					System.out.println("File is Malformatted. Incorrect number of arguments found!");
 					throw new ParserException("");
 				}
-				if(CheckDataValidity.checkArgumentsDataValidity(args) == false) {
-					br.close();
-					System.out.println("File is Malformatted or contains Invalid data.");
-					throw new ParserException("");
-				}
+				
+				// validate the data in the text file
+				CheckDataValidity.checkArgumentsDataValidity(args);
+				
 				// airline name is case insensitive
-				if(!airline.getName().equalsIgnoreCase(args[0])) {
+				if(airline != null && !airline.getName().equalsIgnoreCase(args[0])) {
 					br.close();
 					System.out.println("Provided Airline name does not match with the file.");
 					throw new ParserException("");
+				}
+				if(airline == null) {
+					airline = new Airline(args[0]);
 				}
 				
 				// Everything is fine. create the flight object now.
@@ -89,4 +92,5 @@ public class TextParser implements AirlineParser {
 		this.filepath = filepath;
 		this.airline = airline;
 	}
+	
 }

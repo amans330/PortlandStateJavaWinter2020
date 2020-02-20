@@ -59,6 +59,7 @@ public class Airline extends AbstractAirline{
 	
 	/**
 	 * constructor
+	 * @param name Airline name
 	 */
 	public Airline(String name) {
 		this.name = name;
