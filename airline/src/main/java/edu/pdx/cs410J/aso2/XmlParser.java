@@ -22,11 +22,19 @@ public class XmlParser implements AirlineParser {
 	private String filepath;
 	private Airline airline;
 
+	/**
+	 * 
+	 * @param filepath the filepath of the XML file to read from
+	 * @param airline An empty airline object which will be filled here
+	 */
 	XmlParser(String filepath, Airline airline) {
 		this.filepath = filepath;
 		this.airline = airline;
 	}
-
+	
+	/**
+	 * @return The Airline object containing all the flights found in the XML file
+	 */
 	@Override
 	public AbstractAirline parse() throws ParserException {
 		File file = new File(filepath);

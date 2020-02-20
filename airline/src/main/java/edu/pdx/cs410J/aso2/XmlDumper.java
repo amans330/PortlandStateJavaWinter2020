@@ -32,10 +32,17 @@ public class XmlDumper implements AirlineDumper {
 	private String filePath;
 	private boolean textToXML = false;
 	
+	/**
+	 * 
+	 * @param filePath The path of the XML file where you want to write the Airline object
+	 */
 	XmlDumper(String filePath){
 		this.filePath = filePath;
 	}
-
+	
+	/**
+	 * @param airline airline object which needs to be written to XML file
+	 */
 	@Override
 	public void dump(AbstractAirline airline) throws IOException {
 		try {
@@ -118,6 +125,7 @@ public class XmlDumper implements AirlineDumper {
                 airlineNode.appendChild(flightElement);
             }
             
+            // Standard code to create a XML file
             Transformer tFormer = TransformerFactory.newInstance().newTransformer();
             tFormer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             tFormer.setOutputProperty(OutputKeys.ENCODING, "us-ascii");
