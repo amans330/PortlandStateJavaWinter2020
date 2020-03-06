@@ -31,13 +31,13 @@ public class AirlineRestClientIT {
 //    AirlineRestClient client = newAirlineRestClient();
 //    client.removeAllDictionaryEntries();
 //  }
-//
-//  @Test
-//  public void test1EmptyServerContainsNoDictionaryEntries() throws IOException {
-//    AirlineRestClient client = newAirlineRestClient();
-//    Map<String, String> dictionary = client.getAllDictionaryEntries();
-//    assertThat(dictionary.size(), equalTo(0));
-//  }
+
+  @Test
+  public void testEmptyServerContainsNoAirlineEntries() throws IOException {
+    AirlineRestClient client = newAirlineRestClient();
+    Map<String, String> dictionary = client.getAllAirlneEntries();
+    assertThat(dictionary.size(), equalTo(0));
+  }
 //
 //  @Test
 //  public void test2DefineOneWord() throws IOException {

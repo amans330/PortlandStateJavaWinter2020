@@ -1,7 +1,7 @@
 package edu.pdx.cs410J.aso2;
 
 import edu.pdx.cs410J.InvokeMainTestCase;
-import edu.pdx.cs410J.aso2.AirlineRestClient.AirlineRestException;
+//import edu.pdx.cs410J.aso2.AirlineRestClient.AirlineRestException;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;

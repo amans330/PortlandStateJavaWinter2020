@@ -95,6 +95,9 @@ public class Project5 {
 		if (goOnline && (port == null || host == null))
 			Util.printErrorAndExit("Please mention both, the host name and the port number.");
 
+		if(printDetails && index < 10)
+			Util.printErrorAndExit("Not enough arguments are provided for flight, to be printed.");
+
 		/***** Start data validation *****/
 		String message = null;
 		// 1 argument means get flights
@@ -163,7 +166,7 @@ public class Project5 {
 				AirlineRestClient client = new AirlineRestClient(host, Integer.parseInt(port));
 				String airlineXMLString;
 				Airline airline;
-				edu.pdx.cs410J.aso2.XmlParser parser;
+				XmlParser parser;
 
 				switch (todo) {
 				case GETFLIGHTS:
@@ -174,7 +177,7 @@ public class Project5 {
 						System.exit(0);
 					}
 					// data found, create Airline Object from XML string returned
-					parser = new edu.pdx.cs410J.aso2.XmlParser(airlineXMLString);
+					parser = new XmlParser(airlineXMLString);
 					airline = (Airline) parser.parse();
 					// pretty print
 					System.out.println("Matching Flights found:");

@@ -144,18 +144,18 @@ public class AirlineServlet extends HttpServlet {
 		pw.close();
 	}
 
-	/**
-	 * Handles an HTTP DELETE request by removing all dictionary entries. This
-	 * behavior is exposed for testing purposes only. It's probably not something
-	 * that you'd want a real application to expose.
-	 */
-	@Override
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("text/plain");
-		airlineMap.clear();
-		response.sendError(HttpServletResponse.SC_OK, "All Entries deleted");
-	}
+//	/**
+//	 * Handles an HTTP DELETE request by removing all dictionary entries. This
+//	 * behavior is exposed for testing purposes only. It's probably not something
+//	 * that you'd want a real application to expose.
+//	 */
+//	@Override
+//	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		response.setContentType("text/plain");
+//		airlineMap.clear();
+//		response.sendError(HttpServletResponse.SC_OK, "All Entries deleted");
+//	}
 
 	/**
 	 * Writes an error message about a missing parameter to the HTTP response.
@@ -163,9 +163,9 @@ public class AirlineServlet extends HttpServlet {
 	 * The text of the error message is created by
 	 * {@link Messages#missingRequiredParameter(String)}
 	 */
-	private void sendErrorToClient(HttpServletResponse response, String message) throws IOException {
-		response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
-	}
+//	private void sendErrorToClient(HttpServletResponse response, String message) throws IOException {
+//		response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
+//	}
 
 	/**
 	 * Writes all of the dictionary entries to the HTTP response.
@@ -253,7 +253,7 @@ public class AirlineServlet extends HttpServlet {
 //	}
 
 	@VisibleForTesting
-	String getDefinition(String word) {
-		return null;
+	Airline getAirline(String airline) {
+		return this.airlineMap.get(airline);
 	}
 }

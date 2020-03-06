@@ -29,7 +29,7 @@ public class XmlParser implements AirlineParser {
 	 * @param filepath the filepath of the XML file to read from
 	 * @param airline  An empty airline object which will be filled here
 	 */
-	XmlParser(String xmlString) {
+	public XmlParser(String xmlString) {
 		this.xmlString = xmlString;
 	}
 
