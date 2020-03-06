@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * This servlet ultimately provides a REST API for working with an
  * <code>Airline</code>. However, in its current state, it is an example of how
- * to use HTTP and Java servlets to store simple dictionary of words and their
+ * to use HTTP and Java servlets to store simple Airline of words and their
  * definitions.
  */
 public class AirlineServlet extends HttpServlet {
@@ -34,7 +34,7 @@ public class AirlineServlet extends HttpServlet {
 	/**
 	 * Handles an HTTP GET request from a client by writing the definition of the
 	 * word specified in the "word" HTTP parameter to the HTTP response. If the
-	 * "word" parameter is not specified, all of the entries in the dictionary are
+	 * "word" parameter is not specified, all of the entries in the Airline are
 	 * written to the HTTP response.
 	 */
 	@Override
@@ -58,7 +58,6 @@ public class AirlineServlet extends HttpServlet {
 			if (judgement != ALLGOOD) response.sendError(HttpServletResponse.SC_BAD_REQUEST, judgement);
 			judgement = CheckDataValidity.checkDestination(dest);
 			if (judgement != ALLGOOD) response.sendError(HttpServletResponse.SC_BAD_REQUEST, judgement);
-//			search(airlinename, src, dest, response);
 			
 			Airline airline = airlineMap.get(airlinename);
 			if (airline == null) {
@@ -90,8 +89,8 @@ public class AirlineServlet extends HttpServlet {
 	}
 
 	/**
-	 * Handles an HTTP POST request by storing the dictionary entry for the "word"
-	 * and "definition" request parameters. It writes the dictionary entry to the
+	 * Handles an HTTP POST request by storing the Airline entry for the "word"
+	 * and "definition" request parameters. It writes the Airline entry to the
 	 * HTTP response.
 	 */
 	@Override
@@ -144,45 +143,6 @@ public class AirlineServlet extends HttpServlet {
 		pw.close();
 	}
 
-//	/**
-//	 * Handles an HTTP DELETE request by removing all dictionary entries. This
-//	 * behavior is exposed for testing purposes only. It's probably not something
-//	 * that you'd want a real application to expose.
-//	 */
-//	@Override
-//	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		response.setContentType("text/plain");
-//		airlineMap.clear();
-//		response.sendError(HttpServletResponse.SC_OK, "All Entries deleted");
-//	}
-
-	/**
-	 * Writes an error message about a missing parameter to the HTTP response.
-	 *
-	 * The text of the error message is created by
-	 * {@link Messages#missingRequiredParameter(String)}
-	 */
-//	private void sendErrorToClient(HttpServletResponse response, String message) throws IOException {
-//		response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
-//	}
-
-	/**
-	 * Writes all of the dictionary entries to the HTTP response.
-	 *
-	 * The text of the message is formatted with
-	 * {@link Messages#formatDictionaryEntry(String, String)}
-	 */
-//  private void writeAllDictionaryEntries(HttpServletResponse response ) throws IOException
-//  {
-//      PrintWriter pw = response.getWriter();
-//      Messages.formatDictionaryEntries(pw, dictionary);
-//
-//      pw.flush();
-//
-//      response.setStatus( HttpServletResponse.SC_OK );
-//  }
-
 	/**
 	 * Returns the value of the HTTP request parameter with the given name.
 	 *
@@ -213,44 +173,6 @@ public class AirlineServlet extends HttpServlet {
 		dumper.dump(airline);
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
-
-	/**
-	 * Prints all the Flights of the HTTP request parameter with the given airline
-	 * name and where source and destinations matches with the provided values.
-	 * 
-	 * @param airline_name The airline name for which all flights are required
-	 * @param airline_name Airport src code
-	 * @param airline_name Airport dest code
-	 * @param response     The HTTP response object
-	 */
-//	private void search(String airline_name, String src, String dest, HttpServletResponse response) throws IOException, ServletException {
-//		Airline airline = airlineMap.get(airline_name);
-//		if (airline == null) {
-//			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No Airline Found with this name");
-////			sendMessageAndExit("No Airline Found with this name", response, HttpServletResponse.SC_FORBIDDEN);
-////			return;
-//		}
-//		List<Flight> flights = airline.getFlights();
-//
-//		// create a copy object so airline is unchanged
-//		Airline copy = new Airline(airline.getName());
-//		List<Flight> temp = new ArrayList<Flight>();
-//		for (int i = 0; i < flights.size(); i++) {
-//			if (flights.get(i).getSource().equalsIgnoreCase(src)
-//					&& flights.get(i).getDestination().equalsIgnoreCase(dest))
-//				temp.add(flights.get(i));
-//		}
-//		if(temp.size() == 0) {
-//			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "No matching flights found");
-////			sendMessageAndExit("No matching flights found", response, HttpServletResponse.SC_FORBIDDEN);
-////			return;
-//		}
-//		copy.setFlights(temp);
-//		PrintWriter pw = response.getWriter();
-//		XmlDumper dumper = new XmlDumper(pw);
-//		dumper.dump(copy);
-//		response.setStatus(HttpServletResponse.SC_OK);
-//	}
 
 	@VisibleForTesting
 	Airline getAirline(String airline) {

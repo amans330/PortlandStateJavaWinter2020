@@ -217,7 +217,6 @@ public class Project5 {
 		
 		if(printDetails) {
 			// comes here to just print the flight
-			String airlineName = arguments[0];
 			String flightNumber = arguments[1];
 			String src = arguments[2];
 			Date departDateTime = Util.getDateFromString(arguments[3] + " " + arguments[4] + " " + arguments[5]);
@@ -243,47 +242,26 @@ public class Project5 {
 	}
 
 	/**
-	 * Prints usage information for this program and exits
-	 * 
-	 * @param message An error message to print
-	 */
-	private static void usage(String message) {
-		PrintStream err = System.err;
-		err.println("** " + message);
-		err.println();
-		err.println("usage: java Project5 host port [word] [definition]");
-		err.println("  host         Host of web server");
-		err.println("  port         Port of web server");
-		err.println("  word         Word in dictionary");
-		err.println("  definition   Definition of word");
-		err.println();
-		err.println("This simple program posts words and their definitions");
-		err.println("to the server.");
-		err.println("If no definition is specified, then the word's definition");
-		err.println("is printed.");
-		err.println("If no word is specified, all dictionary entries are printed");
-		err.println();
-
-		System.exit(1);
-	}
-
-	/**
 	 * prints the read me on console.
 	 */
 	public static void printReadMe() {
 		System.out.print("Welcome to the class project of CS510!!\n\nMy name is Aman Singh Solanki. "
-				+ "This is the README for project 5. This program is used to input new airline details in the system. An airline "
+				+ "This is the README for project 5. This program is used to input new airline details in the HTTP Server. An airline "
 				+ "has a name and has multiple flights operating from it. \n\nA Flight in turn has all the details a flight "
 				+ "can have like flight number, depart and arrive timings, date source and destinations. \n\n"
-				+ "Usage: java edu.pdx.cs410J.<login-id>.Project1 [options] <args>\n" + "args are (in this order):\n"
-				+ "airline: The name of the airline\n" + "flightNumber: The flight number\n"
-				+ "src: Three-letter code of departure airport\n" + "depart: Departure date and time (24-hour time)\n"
-				+ "dest: Three-letter code of arrival airport\n" + "arrive: Arrival date and time (24-hour time)\n\n"
+				+ "Usage: java edu.pdx.cs410J.<login-id>.Project5 [options] <args>\n" + "args are (in this order):\n"
+				+ "airline The name of the airline\n"
+				+ "flightNumber The flight number\n"
+				+ "src Three-letter code of departure airport\n"
+				+ "depart Departure date/time\n"
+				+ "dest Three-letter code of arrival airport\n"
+				+ "arrive Arrival date/time\n\n"
 				+ "options are (options may appear in any order):\n"
-				+ "-print: Prints a description of the new flight\n"
-				+ "-README: Prints a README for this project and exits\n\n"
-				+ "There are various rules to input data:\n1. A flight number should be an integer. "
-				+ "\n2. Date should be in the format mm/dd/yyyy\n3. src and dest should be 3 letters");
+				+ "-host hostname Host computer on which the server runs\n"
+				+ "-port port Port on which the server is listening\n"
+				+ "-search Search for flights\n"
+				+ "-print Prints a description of the new flight\n"
+				+ "-README Prints a README for this project and exits\n");
 	}
 
 }
