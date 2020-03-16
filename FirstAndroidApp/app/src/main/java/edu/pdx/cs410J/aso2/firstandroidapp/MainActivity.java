@@ -6,16 +6,14 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.widget.EditText;
-
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "edu.pdx.cs410J.aso2.firstandroidapp.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +54,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /** Called when the user taps the Submit button */
-    public void sendFormData(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.airline_name);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+    public void launchAddFlightView(View view){
+        Intent intent = new Intent(this, AddFlightActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchSearchFlightView(View view){
+        Intent intent = new Intent(this, SearchFlightsActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchReadMeView(View view){
+        Intent intent = new Intent(this, ReadMeActivity.class);
         startActivity(intent);
     }
 }
