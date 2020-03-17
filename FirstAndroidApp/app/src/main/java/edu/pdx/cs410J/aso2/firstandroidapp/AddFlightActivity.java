@@ -98,7 +98,6 @@ public class AddFlightActivity extends AppCompatActivity {
 
         //check if the file with this airline name exists, if yes then add file data to above airline object
         File file = new File(getFilesDir(), airlineName);
-        String str = String.valueOf(getFilesDir());
         String st;
         BufferedReader br;
 
@@ -149,7 +148,7 @@ public class AddFlightActivity extends AppCompatActivity {
             }
 
             // create a pop up message here
-            Snackbar mySnackbar = Snackbar.make(view, "Flight Added Successfully!!", 3000);
+            Snackbar mySnackbar = Snackbar.make(view, "Flight "+flight.toString()+" Added Successfully!!", 3000);
             mySnackbar.show();
 
         } catch (IOException | ParserException e) {

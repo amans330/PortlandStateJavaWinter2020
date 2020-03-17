@@ -49,12 +49,13 @@ public class Util {
 	 * @return Pretty string format of the flight object
 	 */
 	public static String prettyPrint(Flight flight) {
-		SimpleDateFormat formatter = new SimpleDateFormat("EEEEE, dd MMMMM yyyy hh:mm aa");
+		SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy hh:mm aa");
 		long duration = (flight.getArrival().getTime() - flight.getDeparture().getTime())/(1000*60);
+		String departureDateTime = formatter.format(flight.getDeparture());
+		String arrivalDateTime = formatter.format(flight.getArrival());
 		return "Flight "+flight.getNumber()+" departs "+AirportNames.getNamesMap().get(flight.getSource().toUpperCase())+" on "
-				+formatter.format(flight.getDeparture())+" and arrives "+AirportNames.getNamesMap().get(flight.getDestination().toUpperCase()) +" on "
-						+ formatter.format(flight.getArrival())+" with a duration of "+duration+""
-								+ " minutes."; 
+				+ departureDateTime +" and arrives "+AirportNames.getNamesMap().get(flight.getDestination().toUpperCase()) +" on "
+						+ arrivalDateTime +" with a duration of "+duration+" minutes.";
 	}
 	
 	/**

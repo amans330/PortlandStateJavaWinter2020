@@ -1,9 +1,6 @@
 package edu.pdx.cs410J.aso2.firstandroidapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 
@@ -13,14 +10,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.os.Bundle;
 
@@ -55,17 +49,29 @@ public class SearchFlightsActivity extends AppCompatActivity {
             return;
         }
 
-        message = CheckDataValidity.checkSource(source);
-        if (message != ALLGOOD) {
-            showPopUp(view, message);
-            return;
+        if(!source.equals("")){
+            message = CheckDataValidity.checkSource(source);
+            if (message != ALLGOOD) {
+                showPopUp(view, message);
+                return;
+            }
         }
 
-        message = CheckDataValidity.checkDestination(destination);
-        if (message != ALLGOOD) {
-            showPopUp(view, message);
-            return;
+        if(!destination.equals("")){
+            message = CheckDataValidity.checkDestination(destination);
+            if (message != ALLGOOD) {
+                showPopUp(view, message);
+                return;
+            }
         }
+
+        if(source.equals("") || destination.equals("")) {
+            if (!(source.equals("") && destination.equals(""))) {
+                showPopUp(view, "One of source or destination was null. Both should be provided.");
+                return;
+            }
+        }
+
 
         // if all good then check if the file with this airline name exists
         File file = new File(getFilesDir(), airlineName);
@@ -74,6 +80,8 @@ public class SearchFlightsActivity extends AppCompatActivity {
             showPopUp(view, "No airline found with this name.");
             return;
         }
+
+        // else airline exists, now find matching flights
         Airline temp = new Airline(airlineName);
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -88,7 +96,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
                     showPopUp(view, "File is Malformatted. Incorrect number of arguments found!");
                     return;
                 }
-                if (args[0].equalsIgnoreCase(airlineName) && args[2].equalsIgnoreCase(source) && args[6].equalsIgnoreCase(destination)) {
+                if ((source.equals("") && destination.equals("")) || (args[0].equalsIgnoreCase(airlineName) && args[2].equalsIgnoreCase(source) && args[6].equalsIgnoreCase(destination))) {
                     // If Everything is fine. create the flight object now.
                     String flightNumber = args[1];
                     String src = args[2];
