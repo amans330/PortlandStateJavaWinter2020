@@ -21,7 +21,6 @@ import android.os.Bundle;
 import edu.pdx.cs410J.ParserException;
 
 public class SearchFlightsActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "edu.pdx.cs410J.aso2.firstandroidapp.MESSAGE";
     public static final String ALLGOOD = "allgood";
 
     @Override
@@ -30,6 +29,10 @@ public class SearchFlightsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_flights);
     }
 
+    /**
+     * Searches for matching flights in the text file
+     * @param view View object of the activity
+     */
     public void searchFlights(View view) {
         EditText editText = findViewById(R.id.airline_name);
         String airlineName = editText.getText().toString();
@@ -112,6 +115,7 @@ public class SearchFlightsActivity extends AppCompatActivity {
                 showPopUp(view, "No matching Flights found.");
                 return;
             }
+            br.close();
 
             // Save the results to a temp file named tempfile.txt
             File tempfile = new File(getFilesDir(), "tempfile.txt");

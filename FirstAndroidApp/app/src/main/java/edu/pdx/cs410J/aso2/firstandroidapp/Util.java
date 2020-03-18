@@ -33,7 +33,7 @@ public class Util {
 	 */
 	public static Date getDateFromString(String dateString) {
 		Date date = new Date();
-		SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+		SimpleDateFormat sd = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
 		try {
 			date = sd.parse(dateString);
 		} catch (ParseException e) {

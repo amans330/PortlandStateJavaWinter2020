@@ -48,6 +48,7 @@ public class FlightListActivity extends AppCompatActivity {
                 Flight flight = new Flight(Integer.parseInt(flightNumber), src, departDateTime, dest, arriveDateTime);
                 adapter.add(flight);
             }
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

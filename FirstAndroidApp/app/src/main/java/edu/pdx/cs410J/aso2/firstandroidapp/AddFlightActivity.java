@@ -18,8 +18,9 @@ import java.util.List;
 
 import android.os.Bundle;
 
-import edu.pdx.cs410J.ParserException;
-
+/**
+ * This class handles adding a flight to an airline
+ */
 public class AddFlightActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "edu.pdx.cs410J.aso2.firstandroidapp.MESSAGE";
     public static final String ALLGOOD = "allgood";
@@ -30,7 +31,11 @@ public class AddFlightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_flight);
     }
 
-    /** Called when the user taps the Submit button */
+    /**
+     *
+     * @param view The view object of the activity layout
+     * Called when the user taps the Submit button
+     */
     public void sendFormData(View view) {
         EditText editText = findViewById(R.id.airline_name);
         String airlineName = editText.getText().toString();
@@ -122,14 +127,16 @@ public class AddFlightActivity extends AppCompatActivity {
                     if(args.length != 10) {
                         br.close();
                         System.out.println("File is Malformatted. Incorrect number of arguments found!");
-                        throw new ParserException("File is Malformatted");
+                        showPopUp(view, "File is Malformatted");
+                        return;
                     }
 
                     // check if airline names match. airline name is case insensitive
                     if(!airline.getName().equalsIgnoreCase(args[0])) {
                         br.close();
                         Log.e("AddFlight", "Provided Airline name does not match with the file.");
-                        throw new ParserException("Provided Airline name does not match with the file.");
+                        showPopUp(view, "Provided Airline name does not match with the file.");
+                        return;
                     }
 
                     // If Everything is fine. create the flight object now.
@@ -138,6 +145,12 @@ public class AddFlightActivity extends AppCompatActivity {
                     Date departDateTime = Util.getDateFromString(args[3]+" "+args[4]+" "+args[5]);
                     String dest = args[6];
                     Date arriveDateTime = Util.getDateFromString(args[7]+" "+args[8]+" "+args[9]);
+
+                    // arrive date should be after depart date
+                    if (arriveDateTime.getTime() - departDateTime.getTime() < 0) {
+                        showPopUp(view, "Arrival date should be after Departure date. " + "Unless you are in a time machine!");
+                        return;
+                    }
 
                     flight = new Flight(Integer.parseInt(flightNumber), src, departDateTime, dest, arriveDateTime);
                     airline.addFlight(flight);
@@ -151,12 +164,17 @@ public class AddFlightActivity extends AppCompatActivity {
             Snackbar mySnackbar = Snackbar.make(view, "Flight "+flight.toString()+" Added Successfully!!", 3000);
             mySnackbar.show();
 
-        } catch (IOException | ParserException e) {
+        } catch (IOException e) {
 //            Log.e("AddFlight", e.getMessage());
             e.printStackTrace();
         }
     }
 
+    /**
+     *
+     * @param view view object of the activity
+     * @param message Message to show as pop up message
+     */
     public void showPopUp(View view, String message) {
         // create a pop up message here
         Snackbar mySnackbar = Snackbar.make(view, message, 3000);
